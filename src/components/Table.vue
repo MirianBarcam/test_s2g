@@ -5,26 +5,15 @@ import es from 'date-fns/locale/es'
 window.locale = es
 import { useGetData } from '../composable/GetData'
 
-//const { data, getData, loading } = useGetData()
-const dataTable = ref([{}])
-const headerTable = ref(['Name', 'Age', 'Available', 'Last Login'])
-const list = ref([])
-const loading = ref(true)
+const { getData, data, loading } = useGetData()
+const headersTable = ref(['Name', 'Age', 'Available', 'Last Login'])
+const dataTable = ref([])
 
-// getData('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-// console.log(data.value.results)
-fetch('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/users.json')
-  .then((res) => res.json())
-  .then((data) => {
-    dataTable.value = data
-  })
-  .catch((e) => console.log(e))
-  .finally(() => {
-    loading.value = false
-    if (dataTable.value) list.value = dataFormat(dataTable.value)
-    console.log(dataTable.value)
-  })
-
+getData('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/users.json').then(
+  () => {
+    dataTable.value = dataFormat(data.value)
+  }
+)
 const dataFormat = (arrayData) => {
   let userOrderedList = arrayData.map((user) => {
     let userOrdered = {
@@ -45,14 +34,14 @@ const dataFormat = (arrayData) => {
     <table class="container-table">
       <thead>
         <tr>
-          <th v-for="title in headerTable">
+          <th v-for="title in headersTable">
             {{ title }}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="data in list">
-          <td v-for="user in data">
+        <tr v-for="data in dataTable">
+          <td v-for="user in data" :class="data.available ? 'available' : 'not-available'">
             {{ user }}
           </td>
         </tr>
@@ -62,12 +51,21 @@ const dataFormat = (arrayData) => {
 </template>
 
 <style>
+.available {
+  background-color: #85c5a83c;
+}
+
+.not-available {
+  background-color: rgba(224, 97, 97, 0.21);
+}
+
 .container-table {
   border: 1px solid #ddd;
   height: 100%;
   width: 100%;
   overflow-y: scroll;
 }
+
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;
@@ -75,12 +73,13 @@ body {
 }
 
 table {
-  border: 2px solid #42b983;
+  border: 2px solid #0a2217;
   background-color: #fff;
 }
 
 th {
-  background-color: #42b983;
+  background-color: #34495e;
+  color: #f9f9f9;
 }
 
 td {
