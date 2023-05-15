@@ -1,36 +1,9 @@
 <script setup>
-import { ref } from 'vue'
-import { format } from 'date-fns'
-import es from 'date-fns/locale/es'
-window.locale = es
-import { useGetData } from '../composable/GetData'
-
-const { getData, data, loading } = useGetData()
-const headersTable = ref(['Name', 'Age', 'Available', 'Last Login'])
-const dataTable = ref([])
-
-getData('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/users.json').then(
-  () => {
-    dataTable.value = dataFormat(data.value)
-  }
-)
-const dataFormat = (arrayData) => {
-  let userOrderedList = arrayData.map((user) => {
-    let userOrdered = {
-      name: user.name + ' ' + user.surname,
-      age: user.age,
-      available: user.available,
-      lastlogin: format(new Date(user.last_login), 'dd-MM-yyyy', { locale: window.locale })
-    }
-    return userOrdered
-  })
-  return userOrderedList
-}
+const props = defineProps(['dataTable', 'headersTable'])
 </script>
 
 <template>
-  <div v-if="loading">loading...</div>
-  <div v-else class="container-table">
+  <div class="container-table">
     <table class="container-table">
       <thead>
         <tr>
