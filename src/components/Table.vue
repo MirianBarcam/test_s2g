@@ -8,7 +8,8 @@ import { useGetData } from '../composable/GetData'
 //const { data, getData, loading } = useGetData()
 const dataTable = ref([{}])
 const headerTable = ref(['Name', 'Age', 'Available', 'Last Login'])
-const listado = ref([])
+const list = ref([])
+const loading = ref(true)
 
 // getData('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/users.json')
 // console.log(data.value.results)
@@ -20,7 +21,7 @@ fetch('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/user
   .catch((e) => console.log(e))
   .finally(() => {
     loading.value = false
-    if (dataTable.value) listado.value = dataFormat(dataTable.value)
+    if (dataTable.value) list.value = dataFormat(dataTable.value)
     console.log(dataTable.value)
   })
 
@@ -50,7 +51,7 @@ const dataFormat = (arrayData) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="data in listado">
+        <tr v-for="data in list">
           <td v-for="user in data">
             {{ user }}
           </td>
