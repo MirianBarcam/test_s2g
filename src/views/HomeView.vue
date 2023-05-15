@@ -4,20 +4,19 @@ import Table from '../components/Table.vue'
 </script>
 
 <template>
-  <div class="container">
+  <body class="container">
     <div class="container-left">
       <Square />
     </div>
     <div class="container-right">
       <Table></Table>
     </div>
-  </div>
+  </body>
 </template>
 
 <style>
 .container {
-  width: auto;
-  height: 80vh;
+  height: 100%;
   padding: 1.5rem 2rem 1.5rem 2rem;
   display: flex;
   flex-direction: row;
