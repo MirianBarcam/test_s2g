@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(['dataTable', 'headersTable'])
+const props = defineProps(['dataTable', 'headersTable', 'dataToEvaluate'])
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const props = defineProps(['dataTable', 'headersTable'])
       </thead>
       <tbody>
         <tr v-for="data in dataTable">
-          <td v-for="user in data" :class="data.available ? 'available' : 'not-available'">
+          <td v-for="user in data" :class="data[dataToEvaluate] ? 'available' : 'not-available'">
             {{ user }}
           </td>
         </tr>

@@ -11,8 +11,9 @@ import { useGetData } from '../composable/GetData'
 const { getData, data, loading } = useGetData()
 const headersTable = ref(['Name', 'Age', 'Available', 'Last Login'])
 const dataTable = ref([])
-const dataFormat = (arrayData) => {
-  let userOrderedList = arrayData.map((user) => {
+const dataToEvaluate = 'available'
+const dataFormat = (data) => {
+  let userOrderedList = data.map((user) => {
     let userOrdered = {
       name: user.name + ' ' + user.surname,
       age: user.age,
@@ -38,7 +39,11 @@ getData('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/us
     </div>
     <div v-if="loading">loading...</div>
     <div v-else class="container-right">
-      <Table :dataTable="dataTable" :headersTable="headersTable"></Table>
+      <Table
+        :dataTable="dataTable"
+        :headersTable="headersTable"
+        :dataToEvaluate="dataToEvaluate"
+      ></Table>
     </div>
   </body>
 </template>
