@@ -4,7 +4,7 @@ const props = defineProps(['dataTable', 'headersTable', 'dataToEvaluate'])
 
 <template>
   <div class="container-table">
-    <table class="container-table">
+    <table>
       <thead>
         <tr>
           <th v-for="title in headersTable">
@@ -24,6 +24,11 @@ const props = defineProps(['dataTable', 'headersTable', 'dataToEvaluate'])
 </template>
 
 <style>
+.container-table {
+  width: 100%;
+  overflow-y: scroll;
+  height: 20rem;
+}
 .available {
   background-color: #85c5a83c;
 }
@@ -31,14 +36,6 @@ const props = defineProps(['dataTable', 'headersTable', 'dataToEvaluate'])
 .not-available {
   background-color: rgba(224, 97, 97, 0.21);
 }
-
-.container-table {
-  border: 1px solid #ddd;
-  height: 100%;
-  width: 100%;
-  overflow-y: scroll;
-}
-
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;
@@ -46,13 +43,16 @@ body {
 }
 
 table {
-  border: 2px solid #0a2217;
   background-color: #fff;
+  width: 100%;
+  border-spacing: 0px;
 }
 
 th {
   background-color: #34495e;
   color: #f9f9f9;
+  position: sticky;
+  top: 0;
 }
 
 td {
@@ -61,8 +61,8 @@ td {
 
 th,
 td {
-  min-width: 120px;
-  padding: 10px 20px;
+  height: 2rem;
   text-align: center;
+  border: 1px solid white;
 }
 </style>

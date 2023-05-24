@@ -18,7 +18,7 @@ const dataFormat = (data) => {
       name: user.name + ' ' + user.surname,
       age: user.age,
       available: user.available,
-      lastlogin: format(new Date(user.last_login), 'dd-MM-yyyy', { locale: window.locale })
+      lastlogin: format(new Date(user.last_login * 1000), 'dd-MM-yyyy', { locale: window.locale })
     }
     return userOrdered
   })
@@ -50,18 +50,25 @@ getData('https://s2grupo-b4529-default-rtdb.europe-west1.firebasedatabase.app/us
 
 <style>
 .container {
-  height: 100%;
-  padding: 1.5rem 2rem 1.5rem 2rem;
+  height: auto;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: 0;
   display: flex;
   flex-direction: row;
-  gap: 1.5rem;
+  flex-grow: 1;
+  max-height: 500px;
 }
 
 .container-left {
-  width: 20%;
+  width: 20rem;
+  flex-shrink: 0;
+  margin: 1rem;
 }
 
 .container-right {
-  width: 80%;
+  flex-grow: 1;
+  padding-left: 1rem;
+  margin: 1rem;
 }
 </style>

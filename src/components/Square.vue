@@ -150,11 +150,13 @@
 <style>
 .container-square {
   border: 1px solid #ddd;
-  height: 80vh;
   overflow-y: scroll;
+  text-overflow: ellipsis;
+  white-space: initial;
+  min-height: 10rem;
+  max-height: 20rem;
 }
 .texto {
-  padding: 4px;
   background: #fff;
 }
 </style>
